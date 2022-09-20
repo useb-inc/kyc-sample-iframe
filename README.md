@@ -2,8 +2,8 @@
 
 # 주요 샘플 코드 (index.html)
 - 샘플코드 
-  - index.html : https://github.com/useb-inc/kyc-iframe-sample/blob/main/index.html
-  - kyc.js : https://github.com/useb-inc/kyc-iframe-sample/blob/main/js/kyc.js
+  - index.html : https://github.com/useb-inc/kyc-sample-iframe/blob/production/index.html
+  - kyc.js : https://github.com/useb-inc/kyc-sample-iframe/blob/production/js/kyc.js
 ---
 
 # postMessage 데이터 설명
