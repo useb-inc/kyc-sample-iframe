@@ -158,6 +158,12 @@ li:last-child .imgBtn {
 .text-start {
   text-align: start;
 }
+.gap20 {
+  gap: 20px;
+}
+.align-center {
+  align-items: center;
+}
 .justify-center {
   justify-content: center;
 }
