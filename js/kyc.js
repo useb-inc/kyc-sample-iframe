@@ -89,7 +89,7 @@ function iframeOnLoad(e) {
 
 function buttonOnClick(idx) {
     const kycIframe = document.getElementById("kyc_iframe");
-    kycIframe.onload = function () {
+    kycIframe.onload = async function () {
         let params = _.cloneDeep(KYC_PARAMS[idx]);
 
         if (document.getElementById('userinfo_type').value === 'param') {
@@ -106,7 +106,17 @@ function buttonOnClick(idx) {
                 return;
             }
         }
-    
+
+        const authType = document.getElementById('auth_type_checkbox');
+        if (authType.checked) {
+            const { token } = await signIn({
+                customer_id: params.customer_id,
+                username: params.id,
+                password: params.key,
+            });
+            params = { ...params, access_token: token };
+        }
+        
         let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
         kycIframe.contentWindow.postMessage(encodedParams, KYC_TARGET_ORIGIN);
         hideLoadingUI();

@@ -38,3 +38,21 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+
+async function signIn(params) {
+    const { customer_id, username, password } = params;
+    const URL = 'https://kyc-api.useb.co.kr/sign-in'
+
+    const res = await fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            customer_id: Number(customer_id),
+            username,
+            password
+        })
+    });
+    return await await res.json();
+}
