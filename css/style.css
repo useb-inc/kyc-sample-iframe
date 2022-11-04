@@ -38,7 +38,7 @@ ol li {
 
 select {
   width: 90%;
-  max-width: 440px;
+  max-width: 380px;
 }
 
 button {
@@ -55,7 +55,7 @@ button:hover {
 .imgBtn {
   cursor: pointer;
   width: 100%;
-  /* max-width: 440px; */
+  /* max-width: 380px; */
 }
 
 .subTitle {
@@ -65,7 +65,7 @@ button:hover {
 .syntaxHighlight {
   background-color: black;
   margin: 10px;
-  width: 440px;
+  width: 380px;
   max-height: 300px;
   overflow: auto;
   color: white;
