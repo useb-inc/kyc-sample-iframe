@@ -30,28 +30,11 @@
       <div id="information" class="customer--section" style="border: black solid 1px; margin-top: 20px;">
         <h3 class="customer--headline" style="margin: 0; padding: 10px 0 10px 0; color: white; background: #363636; ">데모 활용시 주의사항</h3>
         <h6 class="customer--label" style="font-size: 14px; line-height: 24px; text-align: left; margin: 10px;">
-          • 신분증 이미지 사용 시 <a href="./res/OCR-samples.zip">테스트데이터</a>를 다운로드하여 테스트 <br/> &nbsp; 하시기 바랍니다<br/>
+          • 신분증 이미지 사용 시 <a href="./res/OCR-samples.zip">테스트데이터</a>를 다운로드하여 테스트 하시기 바랍니다<br/>
           • 수집된 데이터는 처리목적이 달성된 경우 지체없이 파기합니다<br/>
-          • 수집된 데이터는 테스트목적 이외의 용도로는 이용되지 않으며, <br/> &nbsp; 제3자에게 제공하지 않습니다<br/>
-          • 유스비는 직접적인 고유식별번호 수집 및 처리를 원칙적으로 <br/> &nbsp; 금지합니다
+          • 수집된 데이터는 테스트목적 이외의 용도로는 이용되지 않으며, 제3자에게 제공하지 않습니다<br/>
+          • 유스비는 직접적인 고유식별번호 수집 및 처리를 원칙적으로 금지합니다
         </h6>
-      </div>
-
-      <div class="customer--division"></div>
-
-      <div class="customer--section">
-        <h3 class="customer--headline">인증 요청 타입</h3>
-        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
-          활성화하면 인증 요청을 access_token 방식으로 요청합니다.
-        </h6>
-        <div class="customer--label flex justify-center align-center gap20">
-          <label for="auth_type_checkbox">Credential</label>
-          <label class="switch">
-            <input id="auth_type_checkbox" type="checkbox">
-            <span class="slider round"></span>
-          </label>
-          <label for="auth_type_checkbox">Access Token</label>
-      </div>
       </div>
 
       <div class="customer--division"></div>
@@ -226,7 +209,22 @@
         </label>
       </div>
 
+      <div class="customer--division"></div>
 
+      <div class="customer--section">
+        <h3 class="customer--headline">인증 요청 타입</h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
+          활성화하면 인증 요청을 access_token 방식으로 요청합니다.
+        </h6>
+        <div class="customer--label flex justify-center align-center gap20">
+          <label for="auth_type_checkbox">Credential</label>
+          <label class="switch">
+            <input id="auth_type_checkbox" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <label for="auth_type_checkbox">Access Token</label>
+        </div>
+      </div>
 
       <br />
       <br />
