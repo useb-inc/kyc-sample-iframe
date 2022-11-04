@@ -24,18 +24,17 @@
           background: no-repeat url('./img/bg_graphic.svg');
           background-size: cover;
         ">
-        eKYC Test
+        useB.eKYC Demo
       </div>
 
-      <div class="customer--section">
-        <h3 class="customer--headline">Debug Window 설정</h3>
-        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
-          활성화하면 PostMessage를 수신하는 시점과 수신 내용을 Debug Window를 통해 보여줍니다.
+      <div id="information" class="customer--section" style="border: black solid 1px; margin-top: 20px;">
+        <h3 class="customer--headline" style="margin: 0; padding: 10px 0 10px 0; color: white; background: #363636; ">데모 활용시 주의사항</h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px; text-align: left; margin: 10px;">
+          • 신분증 이미지 사용 시 <a href="./res/OCR-samples.zip">테스트데이터</a>를 다운로드하여 테스트 <br/> &nbsp; 하시기 바랍니다<br/>
+          • 수집된 데이터는 처리목적이 달성된 경우 지체없이 파기합니다<br/>
+          • 수집된 데이터는 테스트목적 이외의 용도로는 이용되지 않으며, <br/> &nbsp; 제3자에게 제공하지 않습니다<br/>
+          • 유스비는 직접적인 고유식별번호 수집 및 처리를 원칙적으로 <br/> &nbsp; 금지합니다
         </h6>
-        <label class="switch">
-          <input id="debug_win_checkbox" type="checkbox">
-          <span class="slider round"></span>
-        </label>
       </div>
 
       <div class="customer--division"></div>
@@ -59,34 +58,33 @@
 
       <div class="customer--section">
         <h3 class="customer--headline">개인정보 옵션</h3>
-        <div
-          class="flex customer--radio-box"
-          id="param"
-          style="margin-bottom: 16px"
-        >
-          <div class="customer--radio-check" style="margin-right: 18px">
-            <img src="./img/circle.svg" alt="check" />
-          </div>
-          <div class="flex flex-col" style="text-align: start">
-            <span class="customer--title" style="margin-bottom: 8px"
-              >고객사에서 사용자 필수정보를 관리 중</span>
-            <span class="customer--label"
-              >사용자 필수정보를 parameter로 전달</span>
-          </div>
-        </div>
-        <div class="flex customer--radio-box" id="use_input_ui">
+        <div class="flex customer--radio-box" id="use_input_ui"  style="margin-bottom: 16px">
           <div class="customer--radio-check" style="margin-right: 18px">
             <img src="./img/circle.svg" alt="check" />
           </div>
           <div class="flex flex-col" style="text-align: start">
             <span class="customer--title" style="margin-bottom: 8px">
-              고객사에서 사용자 필수정보를 관리 안함
+              필수정보 입력화면 사용
             </span>
             <span class="customer--label">
               사용자 필수정보 입력을 useB.eKYC에 위임
             </span>
           </div>
         </div>
+        <div class="flex customer--radio-box" id="param">
+          <div class="customer--radio-check" style="margin-right: 18px">
+            <img src="./img/circle.svg" alt="check" />
+          </div>
+          <div class="flex flex-col" style="text-align: start">
+            <span class="customer--title" style="margin-bottom: 8px">
+              필수정보 입력화면 미사용
+            </span>
+            <span class="customer--label">
+              고객사에서 useB.eKYC로 사용자 필수정보를 parameter로 전달
+            </span>
+          </div>
+        </div>
+
         <div></div>
       </div>
       <select name="userinfo_type" id="userinfo_type" style="display: none">
@@ -146,7 +144,7 @@
           />
         </div>
         <br />
-        <div class="flex flex-col text-start" style="margin-bottom: 75px">
+        <div class="flex flex-col text-start">
           <span class="customer--label" style="margin-bottom: 8px">
             이메일
           </span>
@@ -157,9 +155,6 @@
             class="customer--input"
           />
         </div>
-        <!-- <button id="userinfo--btn" class="customer--btn">
-          사용자 정보 입력 완료
-        </button> -->
       </div>
       <div class="customer--division"></div>
 
@@ -217,6 +212,21 @@
           </li>
         </ul>
       </div>
+
+      <div class="customer--division"></div>
+
+      <div class="customer--section">
+        <h3 class="customer--headline">Debug Window 설정</h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
+          활성화하면 PostMessage를 수신하는 시점과 수신 내용을 Debug Window를 통해 보여줍니다.
+        </h6>
+        <label class="switch">
+          <input id="debug_win_checkbox" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+
 
       <br />
       <br />
