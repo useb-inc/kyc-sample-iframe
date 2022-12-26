@@ -89,6 +89,26 @@ function iframeOnLoad(e) {
 
 function buttonOnClick(idx) {
     const kycIframe = document.getElementById("kyc_iframe");
+    const hijackMode = document.getElementById('hijack_mode_checkbox');
+
+    let HIJACK_KYC_URL = "";
+    let HIJACK_KYC_TARGET_ORIGIN = "";
+    const hijack_customer_id = document.getElementById('hijack_customer_id').value;
+    const hijack_client_id = document.getElementById('hijack_client_id').value;
+    const hijack_client_secret = document.getElementById('hijack_client_secret').value;
+    const hijack_kyc_target = document.getElementById('hijack_kyc_target').value;
+
+    if (hijackMode.checked) {
+        if (!hijack_customer_id || !hijack_client_id || !hijack_client_secret || !hijack_kyc_target) {
+            alert('hijack 정보가 입력되지 않았습니다.');
+            hideLoadingUI();
+            return;
+        } else {
+            HIJACK_KYC_TARGET_ORIGIN = hijack_kyc_target;
+            HIJACK_KYC_URL = HIJACK_KYC_TARGET_ORIGIN + "/auth";
+        }
+    }
+
     kycIframe.onload = async function () {
         let params = _.cloneDeep(KYC_PARAMS[idx]);
 
@@ -107,6 +127,12 @@ function buttonOnClick(idx) {
             }
         }
 
+        if (hijackMode.checked) {
+            params.customer_id = document.getElementById('hijack_customer_id').value;
+            params.id = document.getElementById('hijack_client_id').value;
+            params.key = document.getElementById('hijack_client_secret').value;
+        }
+
         const authType = document.getElementById('auth_type_checkbox');
         if (authType.checked) {
             const { token } = await signIn({
@@ -118,13 +144,13 @@ function buttonOnClick(idx) {
         }
         
         let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
-        kycIframe.contentWindow.postMessage(encodedParams, KYC_TARGET_ORIGIN);
+        kycIframe.contentWindow.postMessage(encodedParams, (hijackMode.checked ? HIJACK_KYC_TARGET_ORIGIN : KYC_TARGET_ORIGIN));
         hideLoadingUI();
         startKYC();
         kycIframe.onload = null;
     };
     
-    kycIframe.src = KYC_URL;
+    kycIframe.src = (hijackMode.checked ? HIJACK_KYC_URL : KYC_URL);
     showLoadingUI();
 }
 

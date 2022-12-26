@@ -228,8 +228,84 @@
         </div>
       </div>
 
+      <div class="customer--division"></div>
+
+      <div class="customer--section">
+        <h3 class="customer--headline">hijack mode</h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
+          hijack 모드를 활성화 합니다.
+        </h6>
+        <div class="customer--label flex justify-center align-center gap20">
+          <label for="hijack_mode_checkbox">Off</label>
+          <label class="switch">
+            <input id="hijack_mode_checkbox" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <label for="hijack_mode_checkbox">On</label>
+        </div>
+      </div>
+
       <br />
-      <br />
+
+      <div class="customer--division" id="hijack-division" style="display: none;"></div>
+
+      <div id="hijack_div" class="customer--section" style="display: none;">
+        <h3 class="customer--title" style="font-size: 20px; margin-top: 0px">
+          Hijack Customer Info
+        </h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
+          Customer Info를 임의로 수정하여 테스트
+        </h6>
+        <div class="flex flex-col text-start">
+          <span class="customer--label" style="margin-bottom: 8px">customer_id</span>
+          <input
+                  id="hijack_customer_id"
+                  type="text"
+                  value=""
+                  placeholder="CUSTOMER ID"
+                  class="input_txt_kr customer--input"
+          />
+        </div>
+        <br/>
+        <div class="flex flex-col text-start">
+          <span class="customer--label" style="margin-bottom: 8px">client_id</span>
+          <input
+                  id="hijack_client_id"
+                  type="text"
+                  value=""
+                  placeholder="CLIENT ID"
+                  class="input_txt_kr customer--input"
+          />
+        </div>
+        <br/>
+        <div class="flex flex-col text-start">
+          <span class="client_secret" style="margin-bottom: 8px">client_secret</span>
+          <input
+                  id="hijack_client_secret"
+                  type="text"
+                  value=""
+                  placeholder="CLIENT SECRET"
+                  class="input_txt_kr customer--input"
+          />
+        </div>
+        <br/>
+        <div class="flex flex-col text-start">
+          <span class="client_secret" style="margin-bottom: 8px">kyc_target_origin</span>
+          <input
+                  id="hijack_kyc_target"
+                  type="text"
+                  placeholder="KYC TARGET"
+                  value="https://kyc.useb.co.kr"
+                  class="input_txt_kr customer--input"
+          />
+        </div>
+
+        <br />
+        <button class="customer--btn"
+                onclick="buttonOnClick(1);"
+        >Hijack Test</button>
+        <br />
+      </div>
     </div>
 
     <div id="kyc" class="fullscreen" style="display: none">
