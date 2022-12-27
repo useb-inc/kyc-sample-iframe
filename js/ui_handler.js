@@ -6,6 +6,7 @@ const hijackModeCheckbox = document.getElementById('hijack_mode_checkbox');
 const hijackDivision = document.getElementById('hijack-division');
 const hijackDiv = document.getElementById('hijack_div');
 const changeEvent = document.createEvent("HTMLEvents");
+const logicOptionsDiv = document.getElementById('logic-options');
 // const userinfoBtn = document.getElementById('userinfo--btn');
 
 changeEvent.initEvent("change", true, false);
@@ -36,8 +37,10 @@ hijackModeCheckbox.addEventListener('click', () => {
     if (hijackModeCheckbox.checked) {
         hijackDiv.style.display = 'block';
         hijackDivision.style.display = 'block';
+        logicOptionsDiv.style.display = 'none';
     } else {
         hijackDiv.style.display = 'none';
         hijackDivision.style.display = 'none';
+        logicOptionsDiv.style.display = 'block';
     }
 });
