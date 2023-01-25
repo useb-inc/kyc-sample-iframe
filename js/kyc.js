@@ -184,6 +184,32 @@ function initKYC() {
     document.getElementById('kyc').style.display = 'none';
     document.getElementById('customer_end_ui').style.display = 'none';
 
+    document.body.addEventListener('touchstart', (ev) => { 
+        if (ev.touches.length > 1) { 
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }
+      }, {passive: false});
+  
+      document.body.addEventListener('touchmove', (ev) => { 
+      
+        if (ev.touches.length > 1) { 
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+        }
+        
+      }, {passive: false});
+  
+  
+      document.body.addEventListener('touchend', (ev) => { 
+      
+      if (ev.touches.length > 1) { 
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+      }
+      
+    }, {passive: false});
+
     const selectedValue = document.getElementById('userinfo_type').value;
     if (selectedValue === 'param') {
         paramBox.click();
