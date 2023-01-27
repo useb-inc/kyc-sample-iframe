@@ -148,6 +148,31 @@ function initKYC() {
     document.getElementById('kyc').style.display = 'none';
     document.getElementById('customer_end_ui').style.display = 'none';
 
+    if (/iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase())) {
+        const skipTouchActionforZoom = (ev) => {
+            if (ev.touches.length > 1) {
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+            }
+        };
+
+        window.addEventListener(
+            'touchstart',
+            skipTouchActionforZoom,
+            {passive: false}
+        );
+        window.addEventListener(
+            'touchmove',
+            skipTouchActionforZoom,
+            {passive: false}
+        );
+        window.addEventListener(
+            'touchend',
+            skipTouchActionforZoom,
+            {passive: false}
+        );
+    }
+
     const selectedValue = document.getElementById('userinfo_type').value;
     if (selectedValue === 'param') {
         paramBox.click();
