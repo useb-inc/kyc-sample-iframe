@@ -142,6 +142,11 @@ function buttonOnClick(idx) {
             });
             params = { ...params, access_token: token };
         }
+
+        const isEnglish = document.getElementById('is_english_checkbox');
+        if (isEnglish.checked) {
+            params = { ...params, language: "en"}
+        }
         
         let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
         kycIframe.contentWindow.postMessage(encodedParams, (hijackMode.checked ? HIJACK_KYC_TARGET_ORIGIN : KYC_TARGET_ORIGIN));
