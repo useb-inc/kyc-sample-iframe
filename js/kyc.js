@@ -121,7 +121,12 @@ function buttonOnClick(idx) {
         if (isEnglish.checked) {
             params = { ...params, language: "en"}
         }
-        
+
+        const customFont = document.getElementById('custom_font');
+        if (customFont?.value !== '') {
+            params = { ...params, font: customFont.value}
+        }
+
         let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
         kycIframe.contentWindow.postMessage(encodedParams, KYC_TARGET_ORIGIN);
         hideLoadingUI();

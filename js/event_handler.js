@@ -83,6 +83,20 @@ document.getElementById('userinfo_birthday').addEventListener("focusout", (e) =>
     }
 });
 
+document.getElementById('custom_font_select').addEventListener("change",(e) => {
+    if (!e.target) {
+        return;
+    }
+
+    if (e.target.value === 'etc') {
+        document.getElementById('custom_font_etc').style.display = 'inline-block';
+        document.getElementById('custom_font').value = '';
+    } else {
+        document.getElementById('custom_font_etc').style.display = 'none';
+        document.getElementById('custom_font').value = e.target.value;
+    }
+});
+
 const validate_birthday = (e) => {
     let dob1 = e.target.value.replace(/-/gi, "");
     if (dob1.length !== 8) {
