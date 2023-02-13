@@ -244,6 +244,50 @@
       <div class="customer--division"></div>
 
       <div class="customer--section">
+        <h3 class="customer--headline">Font 커스텀 설정</h3>
+        <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
+          직접입력(유료폰트 등)의 경우 사전의 협의 후 설정 가능 <br/>
+          ※ 기본 적용 폰트 : Noto Sans KR
+        </h6>
+
+        <div class="flex flex-col text-start">
+          <span class="customer--label" style="margin-bottom: 8px">폰트선택</span>
+
+          <select name="custom_font_select" id="custom_font_select" class="customer--input">
+            <option value="Noto Sans KR">
+              Noto Sans KR (디폴트)
+            </option>
+            <option value="Noto Serif KR">
+              Noto Serif KR
+            </option>
+            <option value="Nanum Gothic">
+              Nanum Gothic
+            </option>
+            <option value="etc">
+              직접입력
+            </option>
+          </select>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div id="custom_font_etc" class="flex flex-col text-start" style="display: none; width: 100%;">
+          <span class="customer--label" style="margin-bottom: 8px">
+            직접입력
+          </span>
+          <input
+            id="custom_font"
+            type="text"
+            placeholder="폰트 이름"
+            class="customer--input"
+          />
+        </div>
+      </div>
+
+      <div class="customer--division"></div>
+
+      <div class="customer--section">
         <h3 class="customer--headline">hijack mode</h3>
         <h6 class="customer--label" style="font-size: 14px; line-height: 24px">
           hijack 모드를 활성화 합니다.
