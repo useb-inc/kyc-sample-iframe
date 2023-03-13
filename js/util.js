@@ -75,7 +75,9 @@ function isUseBDomain() {
 
 function getSignInURL() {
   if (isUseBDomain()) {
-    return "https://kyc-api.useb.co.kr";
+    const delimiter = "https://kyc"
+    const tmp = KYC_TARGET_ORIGIN.split(delimiter);
+    return delimiter + "-api" + tmp[1];
   } else {
     // POST https://kyc-api.useb.co.kr/sign-in API는 운영계에서 CORS가 미허용되어 있습니다.
     // 따라서, 브라우저(클라이언트)에서 운영계 URL로 /sign-in 호출시 CORS 이슈가 발생되며,
