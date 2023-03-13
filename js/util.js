@@ -68,14 +68,26 @@ function isHijackMode() {
   }
 }
 
+function isUseBDomain() {
+  const USEB_DOMAIN = "useb.co.kr";
+  return window.location.hostname.includes(USEB_DOMAIN);
+}
+
 function getSignInURL() {
-  const delimiter = "https://kyc"
-  const tmp = KYC_TARGET_ORIGIN.split(delimiter);
-  return delimiter + "-api" + tmp[1];
+  if (isUseBDomain()) {
+    return "https://kyc-api.useb.co.kr";
+  } else {
+    // POST https://kyc-api.useb.co.kr/sign-in API는 운영계에서 CORS가 미허용되어 있습니다.
+    // 따라서, 브라우저(클라이언트)에서 운영계 URL로 /sign-in 호출시 CORS 이슈가 발생되며,
+    // 고객사 서버에서 운영계 URL(https://kyc-api.useb.co.kr/sign-in)로 API 호출 후
+    // 응답받은 token을 access_token으로 넣어 연동해야합니다.
+    // 예제에서는 CORS가 허용 되어있는 계발계 URL로 임시 호출하도록 되어있습니다.
+    return "https://kyc-api-dev.useb.co.kr";
+  }
 }
 
 function isDevelopMode() {
-  return window.location.hostname.includes(DEV_KYC_DEMO_DOMAIN) > 0;
+  return window.location.hostname.includes(DEV_KYC_DEMO_DOMAIN);
 }
 
 function setHijackMode() {
