@@ -1,6 +1,6 @@
 // const KYC_TARGET_ORIGIN = "*";     // 보안적으로 취약하니 *을 사용하는것은 권장하지 않습니다. (refer : https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#:~:text=serialize%20them%20yourself.-,targetOrigin,-Specifies%20what%20the)
-const KYC_TARGET_ORIGIN = "https://kyc.useb.co.kr";
-const KYC_URL = "https://kyc.useb.co.kr/auth";
+let KYC_TARGET_ORIGIN = "https://kyc.useb.co.kr";
+let KYC_URL = "https://kyc.useb.co.kr/auth";
 
 // 고객사별 params 정보는 별도로 전달됩니다. 테스트를 위한 임시계정 정보이며, 운영을 위한 계정정보로 변경 필요
 // 계정정보는 하드코딩하지 않고 적절한 보안수준을 적용하여 관리 필요 (적절한 인증절차 후 내부 Server로 부터 받아오도록 관리 등)
@@ -88,30 +88,43 @@ function iframeOnLoad(e) {
   // nothing to do
 }
 
-function buttonOnClick(idx) {
-  const kycIframe = document.getElementById("kyc_iframe");
-  const hijackMode = document.getElementById("hijack_mode_checkbox");
-
-  let HIJACK_KYC_URL = "";
-  let HIJACK_KYC_TARGET_ORIGIN = "";
-  const hijack_customer_id = document.getElementById("hijack_customer_id").value;
-  const hijack_client_id = document.getElementById("hijack_client_id").value;
-  const hijack_client_secret = document.getElementById("hijack_client_secret").value;
-  const hijack_kyc_target = document.getElementById("hijack_kyc_target").value;
-
-  if (hijackMode.checked) {
-    if (!hijack_customer_id || !hijack_client_id || !hijack_client_secret || !hijack_kyc_target) {
-      alert("hijack 정보가 입력되지 않았습니다.");
-      hideLoadingUI();
-      return;
-    } else {
-      HIJACK_KYC_TARGET_ORIGIN = hijack_kyc_target;
-      HIJACK_KYC_URL = HIJACK_KYC_TARGET_ORIGIN + "/auth";
+function setHijackMode() {
+  if (isDevelopMode()) {
+    const hijackMode = document.getElementById("hijack-mode-checkbox");
+    if (hijackMode?.checked) {
+      const hijack_customer_id = document.getElementById("hijack_customer_id").value;
+      const hijack_client_id = document.getElementById("hijack_client_id").value;
+      const hijack_client_secret = document.getElementById("hijack_client_secret").value;
+      const hijack_kyc_target = document.getElementById("hijack_kyc_target").value;
+      if (!hijack_customer_id || !hijack_client_id || !hijack_client_secret || !hijack_kyc_target) {
+        alert("hijack 정보가 입력되지 않았습니다.");
+        hideLoadingUI();
+      } else {
+        KYC_TARGET_ORIGIN = hijack_kyc_target;
+        KYC_URL = KYC_TARGET_ORIGIN + "/auth";
+      }
     }
   }
+}
+
+function performHijack(params) {
+  if (isDevelopMode()) {
+    const hijackMode = document.getElementById("hijack-mode-checkbox");
+    if (hijackMode.checked) {
+      params.customer_id = document.getElementById("hijack_customer_id").value;
+      params.id = document.getElementById("hijack_client_id").value;
+      params.key = document.getElementById("hijack_client_secret").value;
+    }
+  }
+}
+
+function buttonOnClick(idx) {
+  const kycIframe = document.getElementById("kyc_iframe");
+
+  setHijackMode();        // for develop mode
 
   kycIframe.onload = async function () {
-    let params = _.cloneDeep(KYC_PARAMS[idx]);
+      let params = _.cloneDeep(KYC_PARAMS[idx]);
 
     if (document.getElementById("userinfo_type").value === "param") {
       params.name = document.getElementById("userinfo_name").value;
@@ -128,11 +141,7 @@ function buttonOnClick(idx) {
       }
     }
 
-    if (hijackMode.checked) {
-      params.customer_id = document.getElementById("hijack_customer_id").value;
-      params.id = document.getElementById("hijack_client_id").value;
-      params.key = document.getElementById("hijack_client_secret").value;
-    }
+    performHijack(params);        // for develop mode
 
     const authType = document.getElementById("auth_type_checkbox");
     if (authType.checked) {
@@ -155,13 +164,13 @@ function buttonOnClick(idx) {
     }
 
     let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
-    kycIframe.contentWindow.postMessage(encodedParams, hijackMode.checked ? HIJACK_KYC_TARGET_ORIGIN : KYC_TARGET_ORIGIN);
+    kycIframe.contentWindow.postMessage(encodedParams, KYC_TARGET_ORIGIN);
     hideLoadingUI();
     startKYC();
     kycIframe.onload = null;
   };
 
-  kycIframe.src = hijackMode.checked ? HIJACK_KYC_URL : KYC_URL;
+  kycIframe.src = KYC_URL;
   showLoadingUI();
 }
 

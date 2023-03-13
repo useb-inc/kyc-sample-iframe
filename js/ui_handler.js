@@ -2,9 +2,7 @@ const paramBox = document.getElementById('param');
 const useInputUiBox = document.getElementById('use_input_ui');
 const userinfoTypeSelect = document.getElementById('userinfo_type');
 const userinfoDivision = document.getElementById('userinfo-division');
-const hijackModeCheckbox = document.getElementById('hijack_mode_checkbox');
-const hijackDivision = document.getElementById('hijack-division');
-const hijackDiv = document.getElementById('hijack_div');
+
 const changeEvent = document.createEvent("HTMLEvents");
 const logicOptionsDiv = document.getElementById('logic-options');
 // const userinfoBtn = document.getElementById('userinfo--btn');
@@ -33,14 +31,25 @@ useInputUiBox.addEventListener('click', () => {
     userinfoTypeSelect.dispatchEvent(changeEvent);
     userinfoDivision.style.display = 'none';
 });
-hijackModeCheckbox.addEventListener('click', () => {
-    if (hijackModeCheckbox.checked) {
-        hijackDiv.style.display = 'block';
-        hijackDivision.style.display = 'block';
-        logicOptionsDiv.style.display = 'none';
-    } else {
-        hijackDiv.style.display = 'none';
-        hijackDivision.style.display = 'none';
-        logicOptionsDiv.style.display = 'block';
-    }
-});
+
+
+if (isDevelopMode()) {
+    const hijackModeInput = document.getElementById('hijack-mode-input');
+    const hijackModeDivision = document.getElementById('hijack-mode-division');
+    const hijackModeCheckbox = document.getElementById('hijack-mode-checkbox');
+    hijackModeCheckbox.addEventListener('click', () => {
+        if (hijackModeCheckbox.checked) {
+            hijackModeInput.style.display = 'block';
+            hijackModeDivision.style.display = 'block';
+            logicOptionsDiv.style.display = 'none';
+        } else {
+            hijackModeInput.style.display = 'none';
+            hijackModeDivision.style.display = 'none';
+            logicOptionsDiv.style.display = 'block';
+        }
+    });
+} else {
+    document.getElementById('hijack-mode-section').remove();
+    document.getElementById('hijack-mode-division').remove();
+    document.getElementById('hijack-mode-input').remove();
+}

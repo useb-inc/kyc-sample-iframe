@@ -56,3 +56,7 @@ async function signIn(params) {
   });
   return await await res.json();
 }
+
+function isDevelopMode() {
+  return window.location.hostname.includes("kyc-demo-dev.useb.co.kr") > 0;
+}
