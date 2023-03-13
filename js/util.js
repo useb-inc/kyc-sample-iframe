@@ -69,13 +69,9 @@ function isHijackMode() {
 }
 
 function getSignInURL() {
-  let url = KYC_TARGET_ORIGIN;
-  if(isHijackMode()) {
-    const delimiter = "https://kyc"
-    const tmp = KYC_TARGET_ORIGIN.split(delimiter);
-    url = delimiter + "-api" + tmp[1];
-  }
-  return url;
+  const delimiter = "https://kyc"
+  const tmp = KYC_TARGET_ORIGIN.split(delimiter);
+  return delimiter + "-api" + tmp[1];
 }
 
 function isDevelopMode() {
