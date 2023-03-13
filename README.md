@@ -160,7 +160,7 @@
     ```
 ---
 - Step 1) 샘플 코드 다운로드
-  - https://github.com/useb-inc/kyc-iframe-sample/archive/refs/heads/main.zip
+  - https://github.com/useb-inc/kyc-sample-iframe/archive/refs/heads/production.zip
 ---
 - Step 2) 압축 풀기
 ---
