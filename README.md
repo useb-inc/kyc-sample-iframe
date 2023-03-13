@@ -2,8 +2,8 @@
 
 # 주요 샘플 코드 (index.html)
 - 샘플코드 
-  - index.html : https://github.com/useb-inc/kyc-demo/blob/production/index.html
-  - kyc.js : https://github.com/useb-inc/kyc-demo/blob/production/js/kyc.js
+  - index.html : https://github.com/useb-inc/kyc-sample-iframe/blob/production/index.html
+  - kyc.js : https://github.com/useb-inc/kyc-sample-iframe/blob/production/js/kyc.js
 ---
 
 # postMessage 데이터 설명
@@ -160,7 +160,7 @@
     ```
 ---
 - Step 1) 샘플 코드 다운로드
-  - https://github.com/useb-inc/kyc-iframe-sample/archive/refs/heads/main.zip
+  - https://github.com/useb-inc/kyc-sample-iframe/archive/refs/heads/production.zip
 ---
 - Step 2) 압축 풀기
 ---
