@@ -88,36 +88,6 @@ function iframeOnLoad(e) {
   // nothing to do
 }
 
-function setHijackMode() {
-  if (isDevelopMode()) {
-    const hijackMode = document.getElementById("hijack-mode-checkbox");
-    if (hijackMode?.checked) {
-      const hijack_customer_id = document.getElementById("hijack_customer_id").value;
-      const hijack_client_id = document.getElementById("hijack_client_id").value;
-      const hijack_client_secret = document.getElementById("hijack_client_secret").value;
-      const hijack_kyc_target = document.getElementById("hijack_kyc_target").value;
-      if (!hijack_customer_id || !hijack_client_id || !hijack_client_secret || !hijack_kyc_target) {
-        alert("hijack 정보가 입력되지 않았습니다.");
-        hideLoadingUI();
-      } else {
-        KYC_TARGET_ORIGIN = hijack_kyc_target;
-        KYC_URL = KYC_TARGET_ORIGIN + "/auth";
-      }
-    }
-  }
-}
-
-function performHijack(params) {
-  if (isDevelopMode()) {
-    const hijackMode = document.getElementById("hijack-mode-checkbox");
-    if (hijackMode.checked) {
-      params.customer_id = document.getElementById("hijack_customer_id").value;
-      params.id = document.getElementById("hijack_client_id").value;
-      params.key = document.getElementById("hijack_client_secret").value;
-    }
-  }
-}
-
 function buttonOnClick(idx) {
   const kycIframe = document.getElementById("kyc_iframe");
 
