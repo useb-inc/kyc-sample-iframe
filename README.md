@@ -182,5 +182,5 @@
 - Step 5) DEBUG 윈도우
   - 테스트를 진행하시면서 iframe 내에서 동작하는 KYC 서비스에서 특정 이벤트("KYC 인증 성공" 또는 "실패", "사용자 종료(중도이탈 등)")가 발생되면 postMessage 방식으로 그 결과를 전달합니다.
   - postMessage로 전달된 데이터(json 형식)를 DEBUG 윈도우를 통해 확인할 수 있습니다.
-  - ![image](https://user-images.githubusercontent.com/87741912/147376633-15a4b9d6-72c9-4a65-9e47-f98061858272.png)
+  - ![image](https://user-images.githubusercontent.com/87741912/224627552-0ad26b5b-f039-4b68-89be-1df2b95e3751.png)
 ---
