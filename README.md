@@ -175,7 +175,7 @@
   - 아래 화면에서 "서버주소(안전하지 않음)(으)로 이동" 링크 클릭
   - ![image](https://user-images.githubusercontent.com/87741912/147376538-a338f52e-86f1-4a32-8796-c3baee18d230.png)
   - ![image](https://user-images.githubusercontent.com/87741912/147376556-bcf43b90-3191-4a98-b49e-68f9696fc574.png)
-  - 아래 화면과 같이 "약관동의" 화면이 정상적으로 보이면 정상적으로 실행되는 것 입니다.
+  - 아래 화면과 같이 "약관동의" 화면이 정상적으로 보이면 정상적으로 실행되는 것 입니다
   - 아래 화면처럼 iframe으로 KYC 서비스 모바일웹에 전체화면(width:100%, height:100%, border: none)으로 iframe으로 연동이 됩니다.
   - ![image](https://user-images.githubusercontent.com/87741912/147376596-8c633ab2-6ad9-4d7e-a886-3a258e893e29.png)
 ---
