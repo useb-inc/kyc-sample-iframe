@@ -236,7 +236,7 @@ function updateKYCResult(data, json) {
     if (detail.module.id_card_ocr) {
       content =
         "<h5><span style='color:blue'>■ 정상</span> | <span style='color:red'>■ 거부사유</span> | <span style='color:orange'>■ 수동심사사유</span> | <span style='color:purple'>■ 참고사항</span></h5>";
-      content += "<h4 class='subTitle'>신분증 진위확인</h4>";
+      content += "<h4 class='subTitle'>신분증 인증 결과</h4>";
       content +=
         "<br/> - 정부기관 대조 결과 : " +
         (detail.id_card && !detail.module.id_card_verification ? "N/A" : detail.id_card.verified ? "<span style='color:blue'>성공</span>" : "<span style='color:red'>실패</span>");
@@ -249,7 +249,20 @@ function updateKYCResult(data, json) {
         content += "<br/> - 신분증 제출방식 : " + (detail.id_card.is_uploaded === false ? "<span style='color:blue'>카메라 촬영</span>" : "<span style='color:purple'>파일 업로드</span>");
       }
 
+      if (detail.id_card.original_ocr_data) {
+        try {
+          const original_ocr_data = JSON.parse(detail.id_card.original_ocr_data);
+          if (original_ocr_data.truth) {
+            content += "<br/> - 신분증 사본 판별 결과 : " + (original_ocr_data.truth === "REAL" ? "<span style='color:blue'>REAL</span>" : "<span style='color:purple'>FAKE</span>");
+            content += "/ 사본 판별 Confidence : " + (original_ocr_data.truthConfidence);
+          }
+        } catch (e) {
+          console.error("original_ocr_data JSON parse error : " + e);
+        }
+      }
+
       if (detail.id_card.id_card_image) {
+        content += "<br/>";
         content += "<br/> - 신분증 마스킹 사진<br/>&nbsp;&nbsp;&nbsp;<img style='max-height:200px;' src='" + imageConverter(detail.id_card.id_card_image) + "' /></b>";
       }
 
