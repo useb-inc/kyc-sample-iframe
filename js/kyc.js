@@ -254,7 +254,7 @@ function updateKYCResult(data, json) {
           const original_ocr_data = JSON.parse(detail.id_card.original_ocr_data);
           if (original_ocr_data.truth) {
             content += "<br/> - 신분증 사본 판별 결과 : " + (original_ocr_data.truth === "REAL" ? "<span style='color:blue'>REAL</span>" : "<span style='color:purple'>FAKE</span>");
-            content += "/ 사본 판별 Confidence : " + (original_ocr_data.truthConfidence);
+            content += "<br/> - 신분증 사본 판별 Confidence : " + (original_ocr_data.truth === "REAL" ? "<span style='color:blue'>original_ocr_data.truthConfidence</span>" : "<span style='color:purple'>original_ocr_data.truthConfidence</span>");
           }
         } catch (e) {
           console.error("original_ocr_data JSON parse error : " + e);
