@@ -1,4 +1,6 @@
-.customer--header {
+@import url('style.css');
+
+.custom--header {
   background: url('../img/header.svg');
 
   /* background: no-repeat url("../../media/examples/lizard.png"); */
@@ -19,12 +21,12 @@
 
   color: #ffffff;
 }
-.customer--section {
+.custom--section {
   width: 90%;
   margin: 0 auto;
   max-width: 380px;
 }
-.customer--headline {
+.custom--headline {
   font-family: Nunito;
   font-style: normal;
   font-weight: bold;
@@ -36,7 +38,7 @@
   margin-top: 45px;
   margin-bottom: 45px;
 }
-.customer--select-box {
+.custom--select-box {
   border: 1px solid #ced1d2;
   box-sizing: border-box;
   border-radius: 8px;
@@ -45,10 +47,10 @@
   align-items: center;
   padding: 14px 20px;
 }
-.customer--select-input {
+.custom--select-input {
   margin-right: 1rem;
 }
-.customer--select-check {
+.custom--select-check {
   width: 16px;
   height: 16px;
   /* background: #f7f7f7; */
@@ -59,11 +61,11 @@
   align-items: center;
   justify-content: center;
 }
-.customer--select-check.checked {
+.custom--select-check.checked {
   background-color: #373eff;
   border: none;
 }
-.customer--radio-box {
+.custom--radio-box {
   border: 1px solid #ced1d2;
   box-sizing: border-box;
   border-radius: 8px;
@@ -72,7 +74,7 @@
   align-items: center;
   padding: 14px 20px;
 }
-.customer--radio-check {
+.custom--radio-check {
   width: 16px;
   height: 16px;
   /* background: #f7f7f7; */
@@ -83,11 +85,11 @@
   align-items: center;
   justify-content: center;
 }
-.customer--radio-check.checked {
+.custom--radio-check.checked {
   background-color: #373eff;
   border: none;
 }
-.customer--title {
+.custom--title {
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: 500;
@@ -95,7 +97,7 @@
   line-height: 1.5rem;
   color: #363636;
 }
-.customer--label {
+.custom--label {
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
@@ -104,13 +106,13 @@
 
   color: #868686;
 }
-.customer--division {
+.custom--division {
   width: 100%;
   height: 1px;
   background-color: #ced1d2;
   margin: 50px 0px;
 }
-.customer--input {
+.custom--input {
   width: 100%;
   height: 64px;
   font-size: 1.25rem;
@@ -121,7 +123,7 @@
   border-radius: 8px;
 }
 
-.customer--btn {
+.custom--btn {
   width: 100%;
   height: 64px;
 
@@ -169,7 +171,7 @@ li:last-child .imgBtn {
 }
 
 @media (max-width: 414px) {
-  .customer--title {
+  .custom--title {
     font-size: 0.875rem;
     /* line-height: 1.5rem; */
   }
