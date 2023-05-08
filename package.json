@@ -10,6 +10,8 @@
     "start:int": "npm run setup:int && npm run build",
     "start:stg": "npm run setup:stg && npm run build",
     "start:prd": "npm run setup:prd && npm run build",
+    "start:fkr1": "npm run setup:fkr1 && npm run build",
+    "start:fkr2": "npm run setup:fkr2 && npm run build",
     "start:dist": "npm run setup:prd && npm run dist",
     "stop": "kill $(lsof -t -i:8000)",
     "cert": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem",
