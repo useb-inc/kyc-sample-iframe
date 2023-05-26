@@ -47,6 +47,15 @@ window.addEventListener('message', (e) => {
         }
       }
     }
+    if (json2 && json2.attachment) {
+      const attachment = json2.attachment;
+      for (const key in attachment) {
+        if (attachment[key].id) {
+          attachment[key].value =
+            attachment[key].value.substring(0, 20) + '...생략...';
+        }
+      }
+    }
 
     const str = JSON.stringify(json2, undefined, 4);
     const strHighlight = syntaxHighlight(str);

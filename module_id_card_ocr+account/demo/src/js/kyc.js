@@ -5,6 +5,7 @@ let KYC_URL = '{{ENV_KYC_URL}}';
 // 고객사별 params 정보는 별도로 전달됩니다. 테스트를 위한 임시계정 정보이며, 운영을 위한 계정정보로 변경 필요
 // 계정정보는 하드코딩하지 않고 적절한 보안수준을 적용하여 관리 필요 (적절한 인증절차 후 내부 Server로 부터 받아오도록 관리 등)
 const KYC_PARAMS = {
+  1: { customer_id: '2', id: 'demoUser', key: 'demoUser0000!' },
   7: { customer_id: '7', id: 'demoUser', key: 'demoUser0000!' },
 };
 
@@ -32,6 +33,15 @@ window.addEventListener('message', (e) => {
         if (id_card.id_card_origin) {
           id_card.id_card_origin =
             id_card.id_card_origin.substring(0, 20) + '...생략...';
+        }
+      }
+    }
+    if (json2 && json2.attachment) {
+      const attachment = json2.attachment;
+      for (const key in attachment) {
+        if (attachment[key].id) {
+          attachment[key].value =
+            attachment[key].value.substring(0, 20) + '...생략...';
         }
       }
     }
