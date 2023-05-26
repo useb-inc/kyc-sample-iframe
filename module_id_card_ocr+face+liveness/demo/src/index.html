@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/demo.css?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+    />
+    <title>eKYC Sample</title>
+    <script
+      type="text/javascript"
+      src="./js/util.js?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./js/kyc.js?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./lib/lodash.min.js?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+    ></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> -->
+  </head>
+
+  <body onload="initKYC()">
+    <div id="debug_win" class="debug_win" style="display: none"></div>
+    <div
+      id="customer_start_ui"
+      class="fullscreen customerUI"
+      style="text-align: center"
+    >
+      <div
+        class="custom--header"
+        style="
+          background: no-repeat url('./img/bg_graphic.svg');
+          background-size: cover;
+        "
+      >
+        useB.eKYC Demo
+      </div>
+
+      <div
+        id="information"
+        class="custom--section"
+        style="border: black solid 1px; margin-top: 20px"
+      >
+        <h3
+          class="custom--headline"
+          style="
+            margin: 0;
+            padding: 10px 0 10px 0;
+            color: white;
+            background: #363636;
+          "
+        >
+          데모 활용시 주의사항
+        </h3>
+        <h6
+          class="custom--label"
+          style="
+            font-size: 14px;
+            line-height: 24px;
+            text-align: left;
+            margin: 10px;
+          "
+        >
+          • 신분증 이미지 사용 시
+          <a href="./res/OCR-samples.zip?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+            >테스트데이터</a
+          >를 다운로드하여 테스트 하시기 바랍니다<br />
+          • 수집된 데이터는 처리목적이 달성된 경우 지체없이 파기합니다<br />
+          • 수집된 데이터는 테스트목적 이외의 용도로는 이용되지 않으며,
+          제3자에게 제공하지 않습니다<br />
+          • 유스비는 직접적인 고유식별번호 수집 및 처리를 원칙적으로 금지합니다
+        </h6>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">개인정보 옵션</h3>
+        <div
+          class="flex custom--radio-box"
+          id="use_input_ui"
+          style="margin-bottom: 16px"
+        >
+          <div class="custom--radio-check" style="margin-right: 18px">
+            <img src="./img/circle.svg" alt="check" />
+          </div>
+          <div class="flex flex-col" style="text-align: start">
+            <span class="custom--title" style="margin-bottom: 8px">
+              필수정보 입력화면 사용
+            </span>
+            <span class="custom--label">
+              사용자 필수정보 입력을 useB.eKYC에 위임
+            </span>
+          </div>
+        </div>
+        <div class="flex custom--radio-box" id="param">
+          <div class="custom--radio-check" style="margin-right: 18px">
+            <img src="./img/circle.svg" alt="check" />
+          </div>
+          <div class="flex flex-col" style="text-align: start">
+            <span class="custom--title" style="margin-bottom: 8px">
+              필수정보 입력화면 미사용
+            </span>
+            <span class="custom--label">
+              고객사에서 useB.eKYC로 사용자 필수정보를 parameter로 전달
+            </span>
+          </div>
+        </div>
+
+        <div></div>
+      </div>
+      <select name="userinfo_type" id="userinfo_type" style="display: none">
+        <option value="param">
+          입력 UI 미제공(사용자 정보를 고객사에서 처리후 parameter로 전달)
+        </option>
+        <option value="use_input_ui">
+          입력 UI 제공(사용자 정보 입력 처리를 useb.eKYC에 위임)
+        </option>
+      </select>
+      <div class="custom--division" id="userinfo-division"></div>
+
+      <div id="userinfo_div" class="custom--section">
+        <h3 class="custom--title" style="font-size: 20px; margin-top: 0px">
+          테스트할 신분증 정보를 입력해주세요.
+        </h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          실제 프로세스에서 해당 단계는 고객사 내부에서 관리하는 사용자
+          필수정보를 parameter로 전달하게 됩니다.
+        </h6>
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px">이름</span>
+          <input
+            id="userinfo_name"
+            type="text"
+            placeholder="홍길동 or GILDONG HONG"
+            class="input_txt_kr custom--input"
+          />
+          <span
+            class="custom--label"
+            style="margin-top: 8px; line-height: 120%; font-size: 0.6rem"
+          >
+            &nbsp; * 외국인의 경우 <b>Lastname Firstname Middlename</b>으로
+            입력하세요.
+          </span>
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px">
+            생년월일
+          </span>
+          <input
+            id="userinfo_birthday"
+            type="text"
+            placeholder="YYYY-MM-DD"
+            maxlength="10"
+            nextfocus="userinfo_phone_number"
+            class="custom--input"
+          />
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px">
+            전화번호
+          </span>
+          <input
+            id="userinfo_phone_number"
+            type="number"
+            placeholder="01012345678"
+            maxlength="11"
+            class="custom--input"
+          />
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px"> 이메일 </span>
+          <input
+            id="userinfo_email"
+            type="email"
+            placeholder="email.id@domain.net"
+            class="custom--input"
+          />
+        </div>
+      </div>
+      <div class="custom--division"></div>
+
+      <div class="custom--section" id="logic-options">
+        <h3 class="custom--headline">기능 선택 옵션</h3>
+        <ul>
+          <li>
+            <img
+              onclick="buttonOnClick(4);"
+              src="img\id_face_live.svg"
+              class="imgBtn"
+            /><br />
+          </li>
+        </ul>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">신분증 인증 Mode</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          1. Server OCR vs WebAssembly OCR 2. 사본탐지 OFF vs 사본탐지 ON ※ 사본
+          탐지는 WASM OCR 사용시만 동작
+        </h6>
+        <div class="custom--label flex justify-center align-center gap20">
+          <label for="wasm_ocr_mode_checkbox">Server OCR</label>
+          <label class="switch">
+            <input id="wasm_ocr_mode_checkbox" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <label for="wasm_ocr_mode_checkbox">Wasm OCR</label>
+        </div>
+        <br />
+        <div class="custom--label flex justify-center align-center gap20">
+          <label for="wasm_ssa_mode_checkbox">사본탐지 OFF</label>
+          <label class="switch">
+            <input id="wasm_ssa_mode_checkbox" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <label for="wasm_ssa_mode_checkbox">사본탐지 ON</label>
+        </div>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">영문(English)화 설정</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          활성화시 영문(English)으로 KYC 진행이 가능합니다.
+        </h6>
+        <label class="switch">
+          <input id="is_english_checkbox" type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">Debug Window 설정</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          활성화하면 PostMessage를 수신하는 시점과 수신 내용을 Debug Window를
+          통해 보여줍니다.
+        </h6>
+        <label class="switch">
+          <input id="debug_win_checkbox" type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">인증 요청 타입</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          활성화하면 인증 요청을 access_token 방식으로 요청합니다.
+        </h6>
+        <div class="custom--label flex justify-center align-center gap20">
+          <label for="auth_type_checkbox">Credential</label>
+          <label class="switch">
+            <input id="auth_type_checkbox" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <label for="auth_type_checkbox">Access Token</label>
+        </div>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div class="custom--section">
+        <h3 class="custom--headline">Font 커스텀 설정</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          직접입력(유료폰트 등)의 경우 사전의 협의 후 설정 가능 <br />
+          ※ 기본 적용 폰트 : Noto Sans KR
+        </h6>
+
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px">폰트선택</span>
+
+          <select
+            name="custom_font_select"
+            id="custom_font_select"
+            class="custom--input"
+          >
+            <option value="Noto Sans KR">Noto Sans KR (디폴트)</option>
+            <option value="Noto Serif KR">Noto Serif KR</option>
+            <option value="Nanum Gothic">Nanum Gothic</option>
+            <option value="etc">직접입력</option>
+          </select>
+        </div>
+
+        <br />
+        <br />
+
+        <div
+          id="custom_font_etc"
+          class="flex flex-col text-start"
+          style="display: none; width: 100%"
+        >
+          <span class="custom--label" style="margin-bottom: 8px">
+            직접입력
+          </span>
+          <input
+            id="custom_font"
+            type="text"
+            placeholder="폰트 이름"
+            class="custom--input"
+          />
+        </div>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div id="hijack-mode-section" class="custom--section">
+        <h3 class="custom--headline">hijack mode</h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          hijack 모드를 활성화 합니다.
+        </h6>
+        <div class="custom--label flex justify-center align-center gap20">
+          <label for="hijack-mode-checkbox">Off</label>
+          <label class="switch">
+            <input id="hijack-mode-checkbox" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+          <label for="hijack-mode-checkbox">On</label>
+        </div>
+      </div>
+
+      <br />
+
+      <div
+        id="hijack-mode-division"
+        class="custom--division"
+        style="display: none"
+      ></div>
+
+      <div id="hijack-mode-input" class="custom--section" style="display: none">
+        <h3 class="custom--title" style="font-size: 20px; margin-top: 0px">
+          Hijack Customer Info
+        </h3>
+        <h6 class="custom--label" style="font-size: 14px; line-height: 24px">
+          Customer Info를 임의로 수정하여 테스트
+        </h6>
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px"
+            >customer_id</span
+          >
+          <input
+            id="hijack_customer_id"
+            type="text"
+            value=""
+            placeholder="CUSTOMER ID"
+            class="input_txt_kr custom--input"
+          />
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="custom--label" style="margin-bottom: 8px"
+            >client_id</span
+          >
+          <input
+            id="hijack_client_id"
+            type="text"
+            value=""
+            placeholder="CLIENT ID"
+            class="input_txt_kr custom--input"
+          />
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="client_secret" style="margin-bottom: 8px"
+            >client_secret</span
+          >
+          <input
+            id="hijack_client_secret"
+            type="text"
+            value=""
+            placeholder="CLIENT SECRET"
+            class="input_txt_kr custom--input"
+          />
+        </div>
+        <br />
+        <div class="flex flex-col text-start">
+          <span class="client_secret" style="margin-bottom: 8px"
+            >kyc_target_origin</span
+          >
+          <input
+            id="hijack_kyc_target"
+            type="text"
+            placeholder="KYC TARGET"
+            value="https://kyc.useb.co.kr"
+            class="input_txt_kr custom--input"
+          />
+        </div>
+
+        <br />
+        <button class="custom--btn" onclick="buttonOnClick(1);">
+          Hijack Test
+        </button>
+        <br />
+      </div>
+    </div>
+
+    <div id="kyc" class="fullscreen" style="display: none">
+      <iframe id="kyc_iframe" class="fullscreen" allow="camera"></iframe>
+    </div>
+
+    <div
+      id="customer_end_ui"
+      class="fullscreen customerUI"
+      style="display: none"
+    >
+      <div
+        class="custom--header"
+        style="
+          background: no-repeat url('./img/bg_graphic.svg');
+          background-size: cover;
+        "
+      >
+        eKYC Test Result
+      </div>
+
+      <div class="custom--section">
+        <div id="kyc_status" class="custom--headline"></div>
+      </div>
+
+      <div class="custom--section">
+        <button class="custom--btn" onclick="initKYC();">
+          처음부터 다시하기
+        </button>
+      </div>
+
+      <div class="custom--division"></div>
+
+      <div id="kyc_result" class="custom--section"></div>
+    </div>
+
+    <div
+      id="loading_ui"
+      class="fullscreen"
+      style="
+        display: none;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        color: white;
+      "
+    >
+      LOADING ....
+    </div>
+  </body>
+  <script
+    type="text/javascript"
+    src="./js/ui_handler.js?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+  ></script>
+  <script
+    type="text/javascript"
+    src="./js/event_handler.js?ver={{ENV_JENKINS_BUILD_NUMBER}}"
+  ></script>
+</html>
