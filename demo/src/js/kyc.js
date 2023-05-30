@@ -92,8 +92,6 @@ window.addEventListener('message', (e) => {
 function buttonOnClick(idx) {
   const kycIframe = document.getElementById('kyc_iframe');
 
-  setHijackMode(); // for develop mode
-
   kycIframe.onload = async function () {
     let params = _.cloneDeep(KYC_PARAMS[idx]);
 
@@ -131,8 +129,6 @@ function buttonOnClick(idx) {
         return;
       }
     }
-
-    performHijack(params); // for develop mode
 
     const authType = document.getElementById('auth_type_checkbox');
     if (authType.checked) {
