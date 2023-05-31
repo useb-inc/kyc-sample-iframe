@@ -1,5 +1,3 @@
-const DEV_KYC_DEMO_DOMAIN = "kyc-demo-dev.useb.co.kr";
-
 function removeDebugWin() {
   const div = document.getElementById("debug_win");
   div.style.display = "none";
@@ -59,15 +57,6 @@ async function signIn(params) {
   return await res.json();
 }
 
-function isHijackMode() {
-  if (isDevelopMode()) {
-    const hijackMode = document.getElementById("hijack-mode-checkbox");
-    return hijackMode?.checked;
-  } else {
-    return false;
-  }
-}
-
 function isUseBDomain() {
   const USEB_DOMAIN = "useb.co.kr";
   return window.location.hostname.includes(USEB_DOMAIN);
@@ -85,33 +74,5 @@ function getSignInURL() {
     // 응답받은 token을 access_token으로 넣어 연동해야합니다.
     // 예제에서는 CORS가 허용 되어있는 계발계 URL로 임시 호출하도록 되어있습니다.
     return "https://kyc-api-dev.useb.co.kr";
-  }
-}
-
-function isDevelopMode() {
-  return window.location.hostname.includes(DEV_KYC_DEMO_DOMAIN);
-}
-
-function setHijackMode() {
-  if (isHijackMode()) {
-    const hijack_customer_id = document.getElementById("hijack_customer_id").value;
-    const hijack_client_id = document.getElementById("hijack_client_id").value;
-    const hijack_client_secret = document.getElementById("hijack_client_secret").value;
-    const hijack_kyc_target = document.getElementById("hijack_kyc_target").value;
-    if (!hijack_customer_id || !hijack_client_id || !hijack_client_secret || !hijack_kyc_target) {
-      alert("hijack 정보가 입력되지 않았습니다.");
-      hideLoadingUI();
-    } else {
-      KYC_TARGET_ORIGIN = hijack_kyc_target;
-      KYC_URL = KYC_TARGET_ORIGIN + "/auth";
-    }
-  }
-}
-
-function performHijack(params) {
-  if (isHijackMode()) {
-    params.customer_id = document.getElementById("hijack_customer_id").value;
-    params.id = document.getElementById("hijack_client_id").value;
-    params.key = document.getElementById("hijack_client_secret").value;
   }
 }
