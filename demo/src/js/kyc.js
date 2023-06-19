@@ -22,7 +22,7 @@ window.addEventListener('message', (e) => {
     const decodedData = decodeURIComponent(atob(e.data));
     console.log('decoded', decodedData);
     const json = JSON.parse(decodedData);
-    console.log('jsonssss', json);
+    console.log('json', json);
 
     console.log(json.result + '처리 필요');
 
