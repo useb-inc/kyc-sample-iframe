@@ -24,7 +24,7 @@ demo/
 │       └── util.js
 │   └── index.html --> 직접 보게 될 화면 입니다.
 │
-└── gulpfile.babel.js --> gulp를 이용하여 babel로 계속 트랜스파일 하려는것을 자동화 합니다.
+└── gulpfile.babel.js --> gulp를 이용하여 babel로 compile(transpile) 합니다.
 
 
 sample/
