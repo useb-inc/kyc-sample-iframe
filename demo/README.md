@@ -319,13 +319,23 @@
     <img src="../assets/node-npm install.png" />
 
   - http-server 설치 :
+
     - Linux, MAC :
+
     ```shell
     sudo npm install -g http-server
     ```
+
     - Windows :
+
     ```batch
     npm install -g http-server
+    ```
+
+  - gulp-cli 설치 :
+    gulp 명령어를 사용하기 위한 cli입니다.
+    ```shell
+    sudo npm install -g gulp-cli
     ```
 
 ---

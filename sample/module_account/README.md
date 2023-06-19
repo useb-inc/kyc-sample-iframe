@@ -243,13 +243,23 @@
     <img src="../../assets/node-npm install.png" />
 
   - http-server 설치 :
+
     - Linux, MAC :
+
     ```shell
     sudo npm install -g http-server
     ```
+
     - Windows :
+
     ```batch
     npm install -g http-server
+    ```
+
+  - gulp-cli 설치 :
+    gulp 명령어를 사용하기 위한 cli입니다.
+    ```shell
+    sudo npm install -g gulp-cli
     ```
 
 ---
@@ -285,7 +295,7 @@
     <img src="../../assets/link click.png" />
   - 아래 화면과 같이 "데모 활용시 주의사항" 화면이 보이면 정상적으로 실행되는 것 입니다.
 
-  - <img src="../assets/success.png" />
+  - <img src="../../assets/success.png" />
 
 ---
 
