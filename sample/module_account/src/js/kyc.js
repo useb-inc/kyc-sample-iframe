@@ -59,17 +59,17 @@ window.addEventListener('message', (e) => {
 function buttonOnClick(idx) {
   const kycIframe = document.getElementById('kyc_iframe');
 
-  kycIframe.onload = async function () {
+  kycIframe.onload = async function() {
     let params = _.cloneDeep(KYC_PARAMS[idx]);
 
     const wasmOCRModeCheckbox = document.getElementById(
-      'wasm_ocr_mode_checkbox'
+      'wasm_ocr_mode_checkbox',
     );
     if (wasmOCRModeCheckbox.checked) {
       params = { ...params, isWasmOCRMode: 'true' };
 
       const wasmSSAModeCheckbox = document.getElementById(
-        'wasm_ssa_mode_checkbox'
+        'wasm_ssa_mode_checkbox',
       );
       if (wasmSSAModeCheckbox.checked) {
         params = { ...params, isWasmSSAMode: 'true' };
@@ -79,7 +79,7 @@ function buttonOnClick(idx) {
       params.name = document.getElementById('userinfo_name').value;
       params.birthday = document.getElementById('userinfo_birthday').value;
       params.phone_number = document.getElementById(
-        'userinfo_phone_number'
+        'userinfo_phone_number',
       ).value;
       params.email = document.getElementById('userinfo_email').value;
 
@@ -199,31 +199,31 @@ function updateKYCResult(data, json) {
   if (detail) {
     let result_type_txt = 'N/A';
     if (detail.result_type === 1) {
-      result_type_txt = "<span style='color:blue'>자동승인</span>";
+      result_type_txt = '<span style=\'color:blue\'>자동승인</span>';
     } else if (detail.result_type === 2) {
-      result_type_txt = "<span style='color:red'>자동거부</span>";
+      result_type_txt = '<span style=\'color:red\'>자동거부</span>';
     } else if (detail.result_type === 5) {
-      result_type_txt = "<span style='color:orange'>수동심사대상</span>";
+      result_type_txt = '<span style=\'color:orange\'>수동심사대상</span>';
     } else {
       result_type_txt = 'INVALID_TYPE';
     }
     title1.innerHTML +=
       '- 인증 결과 : ' +
       (json.result === 'success'
-        ? "<span style='color:blue'>성공</span>"
-        : "<span style='color:red'>실패</span>") +
+        ? '<span style=\'color:blue\'>성공</span>'
+        : '<span style=\'color:red\'>실패</span>') +
       ' </br>';
     title1.innerHTML += '- 종합 판정 결과 : ' + result_type_txt + ' </br>';
 
     if (detail.module.account_verification) {
       content += '<br/>';
-      content += "<h4 class='subTitle'>1원 계좌 인증</h4>";
+      content += '<h4 class=\'subTitle\'>1원 계좌 인증</h4>';
       content +=
         '<br/> - 1원 계좌 인증 결과 : ' +
         (detail.account
           ? detail.account.verified
-            ? "<span style='color:blue'>성공</span>"
-            : "<span style='color:red'>실패</span>"
+            ? '<span style=\'color:blue\'>성공</span>'
+            : '<span style=\'color:red\'>실패</span>'
           : 'N/A');
       if (detail.account) {
         content +=
@@ -234,9 +234,9 @@ function updateKYCResult(data, json) {
         content +=
           '<br/> - 수정된 예금주명(수정한 경우만) : ' +
           (detail.account.mod_account_holder
-            ? "<span style='color:orange'>" +
-              detail.account.mod_account_holder +
-              '</span>'
+            ? '<span style=\'color:orange\'>' +
+            detail.account.mod_account_holder +
+            '</span>'
             : 'N/A');
         content +=
           '<br/> - 금융사명 : ' +
