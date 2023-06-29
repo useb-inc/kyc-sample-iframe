@@ -5,42 +5,42 @@
 - 크게 demo와 sample로 나뉘어져 있습니다.
   - demo는 전체 모듈들이 들어있는 폴더 입니다.
   - sample은 신분증인증, 계좌인증등 모듈별로 나뉘어져 있는 폴더 입니다.
-    각 폴더는 demo와 같은 구조를 이루고 있습니다.
+    각 폴더는 demo와 같은 구조를 이루고 있으며, 구매하여 사용하는 모듈의 조합과 동일한 샘플을 참고하시면 됩니다. 
 
 ```
 demo/
-├── public/ 코드 다운로드 시에, 그대로 받게 되는 폴더입니다.
+├── public/      --> 'npm run build'(gulp build)시 babel로 compile 되지 않고, 배포 산출물 디렉토리 루트에 그대로 복사됩니다.
 │   └── img/
 │   └── lib/
 │   └── res/
-├── src/
+├── src/         --> 'npm run build'(gulp build)시 babel로 compile 되어, 배포 산출물 디렉토리에 변환됩니다.
 │   └── css/
 │       └── demo.css
 │       └── style.css
 │   └── js/
 │       └── event_handler.js
-│       └── kyc.js --> index.html 에서 실행될 샘플 js script 입니다.
+│       └── kyc.js             --> index.html 에서 실행될 샘플 js 입니다.
 │       └── ui_handler.js
 │       └── util.js
-│   └── index.html --> 직접 보게 될 화면 입니다.
+│   └── index.html             --> eKYC 연동시 고객사에서 참고하여 구현할 페이지 예시로 eKYC UI를 띄울 iframe을 포함하고, postMessage를 수신하여 그려주는 ui를 갖습니다.
 │
-└── gulpfile.babel.js --> gulp를 이용하여 babel로 compile(transpile) 합니다.
+└── gulpfile.babel.js -->  'npm run build'(gulp build)시 실행되는 파일로, gulp를 이용하여 babel로 compile(transpile) 합니다.
 
 
 sample/
-├── module_id_card_ocr
+├── module_id_card_ocr                            --> 신분증 인증
 │
-├── module_id_card_ocr+face
+├── module_id_card_ocr+face                       --> 신분증 인증 + 안면 인증(신분증 얼굴 vs 셀피 비교)
 │
-├── module_id_card_ocr+face+liveness
+├── module_id_card_ocr+face+liveness              --> 신분증 인증 + 안면 인증(신분증 얼굴 vs 셀피 비교 + 라이브니스)
 │
-├── module_id_card_ocr+face+liveness+account
+├── module_id_card_ocr+face+liveness+account      --> 신분증 인증 + 안면 인증(신분증 얼굴 vs 셀피 비교 + 라이브니스) + 계좌인증
 │
-├── module_account
+├── module_account                                --> 계좌인증
 │
-├── module_id_card_ocr+account
+├── module_id_card_ocr+account                   --> 신분증 인증 + 계좌인증
 │
-└── module_id_card_ocr+face+account
+└── module_id_card_ocr+face+account              --> 신분증 인증 + 안면 인증(신분증 얼굴 vs 셀피 비교) + 계좌인증
 ```
 
 # 샘플 코드 셋업 가이드
