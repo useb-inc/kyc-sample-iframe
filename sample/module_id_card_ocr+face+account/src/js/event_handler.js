@@ -8,7 +8,7 @@ document.querySelectorAll('input').forEach((element) => {
         if (!target || !target.attributes["maxlength"]) {
             return;
         }
-        const maxLength = parseInt(target.attributes["maxlength"].value, 10);
+        const maxLength = parseInt(target.attributes['maxlength'].value, 10);
         const myLength = target.value.length;
 
         if (myLength > maxLength) {

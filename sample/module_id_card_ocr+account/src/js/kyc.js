@@ -74,17 +74,17 @@ window.addEventListener('message', (e) => {
 function buttonOnClick(idx) {
   const kycIframe = document.getElementById('kyc_iframe');
 
-  kycIframe.onload = async function () {
+  kycIframe.onload = async function() {
     let params = _.cloneDeep(KYC_PARAMS[idx]);
 
     const wasmOCRModeCheckbox = document.getElementById(
-      'wasm_ocr_mode_checkbox'
+      'wasm_ocr_mode_checkbox',
     );
     if (wasmOCRModeCheckbox.checked) {
       params = { ...params, isWasmOCRMode: 'true' };
 
       const wasmSSAModeCheckbox = document.getElementById(
-        'wasm_ssa_mode_checkbox'
+        'wasm_ssa_mode_checkbox',
       );
       if (wasmSSAModeCheckbox.checked) {
         params = { ...params, isWasmSSAMode: 'true' };
@@ -94,7 +94,7 @@ function buttonOnClick(idx) {
       params.name = document.getElementById('userinfo_name').value;
       params.birthday = document.getElementById('userinfo_birthday').value;
       params.phone_number = document.getElementById(
-        'userinfo_phone_number'
+        'userinfo_phone_number',
       ).value;
       params.email = document.getElementById('userinfo_email').value;
 
@@ -198,7 +198,7 @@ function initKYC() {
 }
 
 function updateKYCResult(data, json) {
-  const imageConverter = function (str) {
+  const imageConverter = function(str) {
     return 'data:image/jpeg;base64,' + str;
   };
 
@@ -218,70 +218,70 @@ function updateKYCResult(data, json) {
   if (detail) {
     let result_type_txt = 'N/A';
     if (detail.result_type === 1) {
-      result_type_txt = "<span style='color:blue'>자동승인</span>";
+      result_type_txt = '<span style=\'color:blue\'>자동승인</span>';
     } else if (detail.result_type === 2) {
-      result_type_txt = "<span style='color:red'>자동거부</span>";
+      result_type_txt = '<span style=\'color:red\'>자동거부</span>';
     } else if (detail.result_type === 5) {
-      result_type_txt = "<span style='color:orange'>수동심사대상</span>";
+      result_type_txt = '<span style=\'color:orange\'>수동심사대상</span>';
     } else {
       result_type_txt = 'INVALID_TYPE';
     }
     title1.innerHTML +=
       '- 인증 결과 : ' +
       (json.result === 'success'
-        ? "<span style='color:blue'>성공</span>"
-        : "<span style='color:red'>실패</span>") +
+        ? '<span style=\'color:blue\'>성공</span>'
+        : '<span style=\'color:red\'>실패</span>') +
       ' </br>';
     title1.innerHTML += '- 종합 판정 결과 : ' + result_type_txt + ' </br>';
 
     if (detail.module.id_card_ocr) {
       content =
-        "<h5><span style='color:blue'>■ 정상</span> | <span style='color:red'>■ 거부사유</span> | <span style='color:orange'>■ 수동심사사유</span> | <span style='color:purple'>■ 참고사항</span></h5>";
-      content += "<h4 class='subTitle'>신분증 인증 결과</h4>";
+        '<h5><span style=\'color:blue\'>■ 정상</span> | <span style=\'color:red\'>■ 거부사유</span> | <span style=\'color:orange\'>■ 수동심사사유</span> | <span style=\'color:purple\'>■ 참고사항</span></h5>';
+      content += '<h4 class=\'subTitle\'>신분증 인증 결과</h4>';
       content +=
         '<br/> - 정부기관 대조 결과 : ' +
         (detail.id_card && !detail.module.id_card_verification
           ? 'N/A'
           : detail.id_card.verified
-          ? "<span style='color:blue'>성공</span>"
-          : "<span style='color:red'>실패</span>");
+            ? '<span style=\'color:blue\'>성공</span>'
+            : '<span style=\'color:red\'>실패</span>');
 
       if (detail.id_card.modified !== undefined) {
         content +=
           '<br/> - 정보수정여부 : ' +
           (detail.id_card.modified === false
-            ? "<span style='color:blue'>NO</span>"
-            : "<span style='color:orange'>YES</span>");
+            ? '<span style=\'color:blue\'>NO</span>'
+            : '<span style=\'color:orange\'>YES</span>');
       }
 
       if (detail.id_card.is_uploaded !== undefined) {
         content +=
           '<br/> - 신분증 제출방식 : ' +
           (detail.id_card.is_uploaded === false
-            ? "<span style='color:blue'>카메라 촬영</span>"
-            : "<span style='color:purple'>파일 업로드</span>");
+            ? '<span style=\'color:blue\'>카메라 촬영</span>'
+            : '<span style=\'color:purple\'>파일 업로드</span>');
       }
 
       if (detail.id_card.original_ocr_data) {
         try {
           const original_ocr_data = JSON.parse(
-            detail.id_card.original_ocr_data
+            detail.id_card.original_ocr_data,
           );
           if (original_ocr_data.truth) {
             content +=
               '<br/> - 신분증 사본 판별 결과 : ' +
               (original_ocr_data.truth === 'REAL'
-                ? "<span style='color:blue'>REAL</span>"
-                : "<span style='color:purple'>FAKE</span>");
+                ? '<span style=\'color:blue\'>REAL</span>'
+                : '<span style=\'color:purple\'>FAKE</span>');
             content +=
               '<br/> - 신분증 사본 판별 Confidence : ' +
               (original_ocr_data.truth === 'REAL'
-                ? "<span style='color:blue'>" +
-                  original_ocr_data.truthConfidence +
-                  '</span>'
-                : "<span style='color:purple'>" +
-                  original_ocr_data.truthConfidence +
-                  '</span>');
+                ? '<span style=\'color:blue\'>' +
+                original_ocr_data.truthConfidence +
+                '</span>'
+                : '<span style=\'color:purple\'>' +
+                original_ocr_data.truthConfidence +
+                '</span>');
           }
         } catch (e) {
           console.error('original_ocr_data JSON parse error : ' + e);
@@ -291,28 +291,28 @@ function updateKYCResult(data, json) {
       if (detail.id_card.id_card_image) {
         content += '<br/>';
         content +=
-          "<br/> - 신분증 마스킹 사진<br/>&nbsp;&nbsp;&nbsp;<img style='max-height:200px;' src='" +
+          '<br/> - 신분증 마스킹 사진<br/>&nbsp;&nbsp;&nbsp;<img style=\'max-height:200px;\' src=\'' +
           imageConverter(detail.id_card.id_card_image) +
-          "' /></b>";
+          '\' /></b>';
       }
 
       if (detail.id_card.id_card_origin) {
         content +=
-          "<br/> - 신분증 원본 사진<br/>&nbsp;&nbsp;&nbsp;<img style='max-height:200px;' src='" +
+          '<br/> - 신분증 원본 사진<br/>&nbsp;&nbsp;&nbsp;<img style=\'max-height:200px;\' src=\'' +
           imageConverter(detail.id_card.id_card_origin) +
-          "' /></b>";
+          '\' /></b>';
       }
     }
 
     if (detail.module.account_verification) {
       content += '<br/>';
-      content += "<h4 class='subTitle'>1원 계좌 인증</h4>";
+      content += '<h4 class=\'subTitle\'>1원 계좌 인증</h4>';
       content +=
         '<br/> - 1원 계좌 인증 결과 : ' +
         (detail.account
           ? detail.account.verified
-            ? "<span style='color:blue'>성공</span>"
-            : "<span style='color:red'>실패</span>"
+            ? '<span style=\'color:blue\'>성공</span>'
+            : '<span style=\'color:red\'>실패</span>'
           : 'N/A');
       if (detail.account) {
         content +=
@@ -323,9 +323,9 @@ function updateKYCResult(data, json) {
         content +=
           '<br/> - 수정된 예금주명(수정한 경우만) : ' +
           (detail.account.mod_account_holder
-            ? "<span style='color:orange'>" +
-              detail.account.mod_account_holder +
-              '</span>'
+            ? '<span style=\'color:orange\'>' +
+            detail.account.mod_account_holder +
+            '</span>'
             : 'N/A');
         content +=
           '<br/> - 금융사명 : ' +

@@ -3,6 +3,7 @@ function removeDebugWin() {
   div.style.display = 'none';
   div.innerHTML = '';
 }
+
 function updateDebugWin(inp) {
   if (document.getElementById('debug_win_checkbox').checked === false) {
     return;
@@ -19,6 +20,7 @@ function updateDebugWin(inp) {
   div.appendChild(pre);
   div.style.display = 'block';
 }
+
 function syntaxHighlight(json) {
   json = json
     .replace(/&/g, '&amp;')
