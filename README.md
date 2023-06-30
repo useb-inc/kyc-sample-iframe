@@ -74,33 +74,44 @@ sample/
 
 ---
 
-- Step 2) 압축 풀기
+- Step 2) 압축 풀기 및 데모(또는 샘플) 코드 디렉토리로 이동, 연관 node package 설치
+  - 압축 풀기
+    - 다운로드한 kyc-sample-iframe-production.zip 파일을 압축 해제
+  - 데모 코드 예시
+    - 압축해제한 곳에서 ```cd demo``` 명령으로 데모 폴더로 이동
+  - 샘플 코드 예시
+    - 압축해제한 곳에서 ```cd "sample/module_id_card_ocr+account"```(예시: 신분증+계좌 인증 샘플) 명령으로  폴더로 이동
+  - 연관 node package 설치
+    - ```npm install``` 명령어로 연관 패키지 설치
 
 ---
 
 - Step 3) 실행(https server 실행, 임의로 생성한 샘플 인증서 사용) 및 테스트
 
-  - 명령어 : npm run cert로 인증서를 받고,(코드입력 후, 아무것도 입력하지 않고 엔터만 쳐줘도 됩니다.)
+  - 인증서 생성
+    - ```npm run cert``` 명렁어로 실행 후 'cert.pem' 파일과 'key.pem' 파일이 생성된 것 확인
+    - ※ 윈도우 cmd의 경우 'openssl' 명령이 실행되지 않음, ```git bash```를 실행하여 git bash 상에서 명령어 수행)
 
-    cert.pem 파일과 key.pem파일이 만들어진걸 확인한 후, npm run start.
+  - web server 실행
+    - ```npm run start``` 명령어로 서버 실행
 
-  - 이때 key.pem 파일만 만들어졌을경우, 다시 npm run cert 후, 입력 필드중 한 필드만 값 입력하여 다시 생성.
-    <img src="./assets/npm run start full.png" />
+      <img src="./assets/npm run start full.png" />
 
 ---
 
 - Step 4) 접속 및 테스트(휴대폰 권장, PC의 경우 웹캠 화질이 충분히 좋아야 함)
-
-  <img src="./assets/npm run start.png" />
-
   - Step 3)에서 나온 서버주소 중 본인의 환경에 맞게 브라우저에서 접속
-  - 샘플코드에서는 공인된 CA 인증서를 사용하여 HTTPS 서버를 돌리는 것이 아니기 때문에 경고화면 나옴 : 고급 클릭
-  - 아래 화면에서 "서버주소(안전하지 않음)(으)로 이동" 링크 클릭
-    <img src="./assets/btn click.png" />
-    <img src="./assets/link click.png" />
+
+    <img src="./assets/npm run start.png" />
+
+  - 샘플코드에서는 공인된 CA 인증서를 사용하여 HTTPS 서버를 돌리는 것이 아니기 때문에 경고화면 나옴
+    - 고급 클릭
+    - 아래 화면에서 "서버주소(안전하지 않음)(으)로 이동" 링크 클릭
+      <img src="./assets/btn click.png" />
+      <img src="./assets/link click.png" />
   - 아래 화면과 같이 "데모 활용시 주의사항" 화면이 보이면 정상적으로 실행되는 것 입니다.
 
-  - <img src="./assets/success.png" />
+    <img src="./assets/success.png" />
 
 ---
 
