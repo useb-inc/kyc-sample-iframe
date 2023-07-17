@@ -48,10 +48,10 @@ const html = (src, dest) => gulp.src(src).pipe(gulp.dest(dest));
 
 const res = (src, dest) => gulp.src(src).pipe(gulp.dest(dest));
 
-const demo_js_build = () => js('src/**/*.js', BUILD_DIR + '/');
-const demo_css_build = () => css('src/css/demo.css', BUILD_DIR + '/' + '/css');
-const demo_html_build = () => html('src/**/*.html', BUILD_DIR + '/');
-const demo_res_build = () => res('public/**/*', BUILD_DIR + '/');
+const demo_js_build = () => js('src/**/*.js', BUILD_DIR);
+const demo_css_build = () => css('src/css/demo.css', BUILD_DIR + '/css');
+const demo_html_build = () => html('src/**/*.html', BUILD_DIR);
+const demo_res_build = () => res('public/**/*', BUILD_DIR);
 
 const demo_js_debug = () =>
   js('src/**/*.js', BUILD_DIR, false, false, false, false);

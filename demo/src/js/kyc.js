@@ -95,19 +95,6 @@ function buttonOnClick(idx) {
   kycIframe.onload = async function () {
     let params = _.cloneDeep(KYC_PARAMS[idx]);
 
-    const wasmOCRModeCheckbox = document.getElementById(
-      'wasm_ocr_mode_checkbox'
-    );
-    if (wasmOCRModeCheckbox.checked) {
-      params = { ...params, isWasmOCRMode: 'true' };
-
-      const wasmSSAModeCheckbox = document.getElementById(
-        'wasm_ssa_mode_checkbox'
-      );
-      if (wasmSSAModeCheckbox.checked) {
-        params = { ...params, isWasmSSAMode: 'true' };
-      }
-    }
     if (document.getElementById('userinfo_type').value === 'param') {
       params.name = document.getElementById('userinfo_name').value;
       params.birthday = document.getElementById('userinfo_birthday').value;
@@ -148,6 +135,20 @@ function buttonOnClick(idx) {
     const customFont = document.getElementById('custom_font');
     if (customFont?.value !== '') {
       params = { ...params, font: customFont.value };
+    }
+
+    const wasmOCRModeCheckbox = document.getElementById(
+      'wasm_ocr_mode_checkbox'
+    );
+    if (wasmOCRModeCheckbox.checked) {
+      params = { ...params, isWasmOCRMode: 'true' };
+
+      const wasmSSAModeCheckbox = document.getElementById(
+        'wasm_ssa_mode_checkbox'
+      );
+      if (wasmSSAModeCheckbox.checked) {
+        params = { ...params, isWasmSSAMode: 'true' };
+      }
     }
 
     let encodedParams = btoa(encodeURIComponent(JSON.stringify(params)));
