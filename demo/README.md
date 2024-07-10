@@ -61,8 +61,8 @@
 
     },
     "face_check": { 안면인증 결과
-      "is_same_person": 신분증 얼굴사진 vs 셀피 얼굴사진 비교 결과 [true | false],
-      "is_live": 셀피 얼굴사진 진위확인(라이브니스) 결과 [true | false]
+      "is_same_person": 신분증 얼굴사진 vs 셀피 얼굴사진 비교 결과 [1 -> 자동승인 | 2 -> 수동심사대상 | 3 -> 자동거부],
+      "is_live": 셀피 얼굴사진 진위확인(라이브니스) 결과 [1 -> 자동승인 | 2 -> 자동거부]
       "selfie_image": 셀피 얼굴사진 ["/9j/4AAQSkZ..."]
     },
     "account": { 1원 계좌인증 결과
