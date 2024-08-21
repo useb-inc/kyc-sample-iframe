@@ -314,6 +314,13 @@ function updateKYCResult(data, json) {
           imageConverter(detail.id_card.id_card_origin) +
           "' /></b>";
       }
+
+      if (detail.id_card.id_crop_image) {
+        content +=
+          "<br/> - 신분증 얼굴 사진<br/>&nbsp;&nbsp;&nbsp;<img style='max-height:100px;' src='" +
+          imageConverter(detail.id_card.id_crop_image) +
+          "' />";
+      }
     }
 
     if (detail.module.face_authentication) {
